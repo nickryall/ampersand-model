@@ -44,7 +44,6 @@ var Model = State.extend({
 
         method = this.isNew() ? 'create' : (options.patch ? 'patch' : 'update');
         if (method === 'patch') options.attrs = attrs;
-
         // if we're waiting we haven't actually set our attributes yet so
         // we need to do make sure we send right data
         if (options.wait && method !== 'patch') options.attrs = _.extend(model.serialize(), attrs);
