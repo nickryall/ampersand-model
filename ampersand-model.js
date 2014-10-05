@@ -43,11 +43,11 @@ var Model = State.extend({
         wrapError(this, options);
 
         method = this.isNew() ? 'create' : (options.patch ? 'patch' : 'update');
-        if (method === 'patch') options.attrs = attrs;
-        // if we're waiting we haven't actually set our attributes yet so
-        // we need to do make sure we send right data
-        if (options.wait) options.attrs = _.extend(model.serialize(), attrs);
+        if (method === 'patch' && !options.attrs) options.attrs = attrs;
         sync = this.sync(method, this, options);
+
+        // Restore attributes.
+        if (attrs && options.wait) this.attributes = attributes;
 
         return sync;
     },
