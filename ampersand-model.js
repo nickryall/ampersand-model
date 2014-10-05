@@ -47,7 +47,6 @@ var Model = State.extend({
         // if we're waiting we haven't actually set our attributes yet so
         // we need to do make sure we send right data
         if (options.wait && method !== 'patch') options.attrs = _.extend(model.serialize(), attrs);
-
         sync = this.sync(method, this, options);
 
         return sync;
